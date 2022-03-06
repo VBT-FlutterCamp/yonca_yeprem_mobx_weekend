@@ -1,5 +1,8 @@
 # yonca_yeprem_mobx_weekend
 
+![quotes](https://user-images.githubusercontent.com/70916991/156943881-9349f97d-8fe6-4d75-acb3-13146b66179c.gif)
+
+
 A new Flutter project.
 
 ## Getting Started
