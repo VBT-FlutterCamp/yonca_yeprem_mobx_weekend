@@ -25,32 +25,39 @@ class QuotesView extends StatelessWidget {
                 ),
                 body: Observer(builder: (_) {
                   return viewModel.isLoading
-                      ? ListView.builder(
-                          itemCount: viewModel.quotesList?.length,
-                          itemBuilder: (BuildContext context, int index) {
-                            return Card(
-                              child: ListTile(
-                                title: Text(
-                                  viewModel.quotesList?[index].text ?? '',
-                                  style:
-                                      context.textTheme.headline6?.copyWith(),
-                                ),
-                                subtitle: Padding(
-                                  padding: context.verticalPaddingLow,
-                                  child: Text(
-                                    viewModel.quotesList?[index].author ??
-                                        'Unknown',
-                                    style: context.textTheme.bodyLarge
-                                        ?.copyWith(fontStyle: FontStyle.italic),
-                                  ),
-                                ),
-                              ),
-                            );
-                          },
-                        )
+                      ? buildBody(viewModel)
                       : const Center(
                           child: CircularProgressIndicator(),
                         );
                 })));
+  }
+
+  ListView buildBody(QuoteViewModel viewModel) {
+    return ListView.builder(
+      itemCount: viewModel.quotesList?.length,
+      itemBuilder: (BuildContext context, int index) {
+        return buildListItemCard(viewModel, index, context);
+      },
+    );
+  }
+
+  Card buildListItemCard(
+      QuoteViewModel viewModel, int index, BuildContext context) {
+    return Card(
+      child: ListTile(
+        title: Text(
+          viewModel.quotesList?[index].text ?? '',
+          style: context.textTheme.headline6?.copyWith(),
+        ),
+        subtitle: Padding(
+          padding: context.verticalPaddingLow,
+          child: Text(
+            viewModel.quotesList?[index].author ?? 'Unknown',
+            style: context.textTheme.bodyLarge
+                ?.copyWith(fontStyle: FontStyle.italic),
+          ),
+        ),
+      ),
+    );
   }
 }
